@@ -1,3 +1,4 @@
+package main;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -5,10 +6,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class TestClass extends TestParentClass implements TestInterFACE {
+	
+	 int i =10;
 	public static void main(String[] args) {
+		
+		
+		List<String> temp = null;
+		System.out.println(temp.stream());
+		
+		int w1 = 10;
+		System.out.println(w1>>2);
+		w1 = 10;
+		System.out.println(w1<<2);
 		TestClass testclass = new TestClass();
 		testclass.helloMethod();
 
@@ -48,7 +61,7 @@ public class TestClass extends TestParentClass implements TestInterFACE {
 			System.out.println("empl under manager : " + managerId);
 			groupedMap.get(managerId).forEach(emp -> {
 				System.out.println(emp.getEmpId());
-			});
+			}); 
 			System.out.println("============");
 		});
 
@@ -90,6 +103,30 @@ public class TestClass extends TestParentClass implements TestInterFACE {
 		
 		Stream<Integer> highNumbersSeq = sequentialStream.filter(p-> p>90);
 		highNumbersSeq.forEach(x->System.out.println("Sequential "+x));
+		
+		//finding a number is prime or not
+		System.out.println("is 10 a prime : "+TestClass.isPrime(10));
+		System.out.println("is 11 a prime :"+ TestClass.isPrimeRevWay(11));
+		
+		IntStream.range(2, 20).forEach(a->{System.out.println(a+" :"+ TestClass.isPrime(a));});
+		
+		IntStream.range(2, 20).forEach(a->{System.out.println(a+" :"+TestClass.isPrimeRevWay(a));});
+		
+		
+		int[] intArr = new int[] {1,2,3,4,5,6,7,9};
+		
+		System.out.println(Arrays.stream(intArr).sum());
+		System.out.println(Arrays.stream(intArr));
+		
+	}
+	
+	private static boolean isPrime(int num) {
+		 return IntStream.rangeClosed(2, num/2).noneMatch(i->num%i==0);
+		
+	}
+	
+	private static boolean isPrimeRevWay(int num) {
+		return !IntStream.rangeClosed(2, num/2).anyMatch(i->num%i==0);
 	}
 
 	private static List<EmployeeClass> getEmpList() {
@@ -109,4 +146,5 @@ public class TestClass extends TestParentClass implements TestInterFACE {
 		}
 		return list;
 	}
+	
 }
